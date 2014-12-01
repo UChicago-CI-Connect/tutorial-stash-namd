@@ -1,11 +1,18 @@
-Universe = vanilla
+Universe = grid
+grid_resource = batch condor dbala@login.ci-connect.uchicago.edu
 Executable = namd_stash_run.sh
+
 transfer_input_files = ubq_gbis_eq.conf, ubq.pdb, ubq.psf
+transfer_output_files = OutFilesFromNAMD.tar.gz  
 should_transfer_files=Yes
-Transfer_Output_Files = dummy_output
 when_to_transfer_output = ON_EXIT
-output        = job.out.$(Process)
+
+output        = job.output.$(Process)
 error         = job.error.$(Process)
 log           = job.log.$(Process)
+
+requirements = (HAS_CVMFS_oasis_opensciencegrid_org =?= TRUE)
++ProjectName="ConnectTrain"
+
 Queue 1
 
